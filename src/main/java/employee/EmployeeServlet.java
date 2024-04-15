@@ -37,12 +37,12 @@ public class EmployeeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<EmployeeVO> employees = new ArrayList<>();
 		try {
-			// 1. 드라이버 로딩
-			Class.forName("oracle.jdbc.OracleDriver");
-
-			// 2. 접속 정보를 가지고 접속
-			Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@nextit.or.kr:1521:xe", "java", "oracle21c");
-
+//			// 1. 드라이버 로딩
+//			Class.forName("oracle.jdbc.OracleDriver");
+//
+//			// 2. 접속 정보를 가지고 접속
+//			Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@nextit.or.kr:1521:xe", "java", "oracle21c");
+			Connection connection = DriverManager.getConnection("jdbc:apache:commons:dbcp:chaper17");
 			// 3. 작업 편집기(워크시트)를 생성해준다.
 			Statement statement = connection.createStatement();
 
@@ -59,9 +59,7 @@ public class EmployeeServlet extends HttpServlet {
 				Date hireDate = resultSet.getDate("hire_date");
 				employees.add(new EmployeeVO(employeeId, empName, email, phoneNumber, hireDate.toLocalDate()));
 			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		request.setAttribute("employees", employees);

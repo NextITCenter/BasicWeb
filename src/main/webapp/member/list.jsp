@@ -6,8 +6,29 @@
 <head>
 <meta charset="UTF-8">
 <title>회원 목록</title>
+<style>
+	form {
+		text-align: right;
+		padding-right: 100px;
+	}
+</style>
 </head>
 <body>
+<header>
+<c:choose>
+	<c:when test="${not empty member}"><!-- member != null, member ne null -->
+		<form action="/logout" method="get">
+			<span id="loginName">${member.name }님</span>
+			<button type="submit">로그아웃</button>
+		</form>
+	</c:when>
+	<c:otherwise>
+		<form action="/login" method="get">
+			<button type="submit">로그인</button>
+		</form>
+	</c:otherwise>
+</c:choose>
+</header>
 <h1>회원 목록</h1>
 <a href="/member/add">신규 회원</a>
 <table>

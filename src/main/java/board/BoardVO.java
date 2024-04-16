@@ -26,6 +26,14 @@ public class BoardVO {
 		this.title = title;
 		this.content = content;
 	}
+	// list용 생성자
+	public BoardVO(int no, String writer, String title, LocalDate createDate, int hits) {
+		this.no = no;
+		this.writer = writer;
+		this.title = title;
+		this.createDate = createDate;
+		this.hits = hits;
+	}
 	// select용 생성자
 	public BoardVO(int no, String writer, String title, String content, LocalDate createDate, LocalDate modifyDate,
 			int hits) {

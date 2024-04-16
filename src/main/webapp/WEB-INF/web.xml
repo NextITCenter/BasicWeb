@@ -43,7 +43,6 @@
 			<param-name>poolName</param-name>
 			<param-value>chaper17</param-value>
 		</init-param>
-		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>myservlet</servlet-name>

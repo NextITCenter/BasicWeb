@@ -5,7 +5,9 @@
 	<jsp:param value="회원 목록" name="title"/>
 </jsp:include>
 <h1>회원 목록</h1>
+<c:if test="${not empty sessionScope.member}">
 <a href="/member/add">신규 회원</a>
+</c:if>
 <table>
 	<tr>
 		<th>아이디</th>

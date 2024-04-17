@@ -5,7 +5,9 @@
 	<jsp:param value="게시글 목록" name="title"/>
 </jsp:include>
 <h2>게시판</h2>
+<c:if test="${not empty sessionScope.member}">
 <a href="/board/add">게시글 등록</a>
+</c:if>
 <table>
 	<tr>
 		<th>글번호</th>

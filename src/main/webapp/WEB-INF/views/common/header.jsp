@@ -18,6 +18,10 @@
 </head>
 <body>
 <header>
+	<ul>
+		<li><a href="/board/list">게시판</a></li>
+		<li><a href="/member/list">회원</a></li>
+	</ul>
 <c:choose>
 	<c:when test="${not empty sessionScope.member}"><!-- member != null, member ne null -->
 		<form action="/logout" method="get">

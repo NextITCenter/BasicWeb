@@ -4,7 +4,7 @@
 	<jsp:param value="회원 정보" name="title"/>
 </jsp:include>
 <a href="/member/update?id=${member.id}">수정</a>
-<a href="javascript:deleteMember();">삭제</a>
+<a href="javascript:deleteItem('/member/delete?id=${member.id}');">삭제</a>
 <a href="/member/password?id=${member.id}">비밀번호 수정</a>
 <div>
 	ID: ${member.id }
@@ -15,4 +15,4 @@
 <div>
 	이메일: ${member.email }
 </div>
-<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />

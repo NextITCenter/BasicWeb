@@ -20,4 +20,4 @@
 	<button type="submit">저장</button>
 	<button type="button">취소</button>
 </form>
-<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />

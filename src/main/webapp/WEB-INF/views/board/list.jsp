@@ -4,6 +4,8 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="게시글 목록" name="title"/>
 </jsp:include>
+<h2>게시판</h2>
+<a href="/board/add">게시글 등록</a>
 <table>
 	<tr>
 		<th>글번호</th>
@@ -15,11 +17,11 @@
 	<c:forEach var="board" items="${boards}">
 	<tr>
 		<td>${board.no }</td>
-		<td>${board.title }</td>
+		<td><a href="/board/view?no=${board.no}">${board.title }</a></td>
 		<td>${board.writer }</td>
 		<td>${board.createDate }</td>
 		<td>${board.hits }</td>
 	</tr>
 	</c:forEach>
 </table>
-<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />

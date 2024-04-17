@@ -1,10 +1,8 @@
 package board;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import member.MemberVO;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +31,8 @@ public class BoardDAO {
 				a.hits
 			from
 				board a
-				inner join member b on a.writer = b.id 
+				inner join member b on a.writer = b.id
+			order by a.create_date desc
 			""";
 			statement = connection.prepareStatement(sql);
 			resultSet = statement.executeQuery();
@@ -66,16 +65,65 @@ public class BoardDAO {
 		return list;
 	}
 	public BoardVO getBoard(int searchNo) {
-		return null;
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		BoardVO vo = null;
+		try {
+			Class.forName("oracle.jdbc.OracleDriver");
+			connection = DriverManager.getConnection("jdbc:oracle:thin:@nextit.or.kr:1521:xe", "java", "oracle21c");
+			String sql =
+					"""
+					select
+						a.no,
+						b.name writer,
+						a.title,
+						a.content,
+						a.create_date,
+						a.modify_date,
+						a.hits
+					from
+						board a
+						inner join member b on a.writer = b.id
+					where
+    					no = ?
+					""";
+			statement = connection.prepareStatement(sql);
+			statement.setInt(1, searchNo);
+			resultSet = statement.executeQuery();
+			if (resultSet.next()) {
+				int no = resultSet.getInt("no");
+				String writer = resultSet.getString("writer");
+				String title = resultSet.getString("title");
+				String content = resultSet.getString("content");
+				Date createDate = resultSet.getDate("create_date");
+				Date modifyDate = resultSet.getDate("modify_date");
+				int hits = resultSet.getInt("hits");
+				vo = new BoardVO(no, writer, title, content, createDate.toLocalDate(), modifyDate == null ? null : modifyDate.toLocalDate(), hits);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+				statement.close();
+				resultSet.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return vo;
 	}
 	public int insertBoard(BoardVO vo) {
 		int executeUpdate = 0;
+		Connection connection = null;
+		PreparedStatement statement = null;
 		try {
-			Connection connection = dataSource.getConnection();
+			connection = dataSource.getConnection();
 			String sql = "insert into board (writer, title, content) values (?, ?, ?)";
-			PreparedStatement statement = connection.prepareStatement(sql);
-			
-			statement.setString(1, vo.getWriter());
+            statement = connection.prepareStatement(sql);
+
+            statement.setString(1, vo.getWriter());
 			statement.setString(2, vo.getTitle());
 			statement.setString(3, vo.getContent());
 			
@@ -83,13 +131,68 @@ public class BoardDAO {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+				statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return executeUpdate;
 	}
-	public void updateBoard(BoardVO vo) {
-		
+	public int updateBoard(BoardVO vo) {
+		int executeUpdate = 0;
+		Connection connection = null;
+		PreparedStatement statement = null;
+		try {
+			connection = dataSource.getConnection();
+			String sql = "update board set title = ?, content = ?, modify_date = sysdate where no = ?";
+            statement = connection.prepareStatement(sql);
+
+            statement.setString(1, vo.getTitle());
+			statement.setString(2, vo.getContent());
+			statement.setInt(3, vo.getNo());
+
+			executeUpdate = statement.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+				statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return executeUpdate;
+
 	}
-	public void deleteBoard(int deleteNo) {
-		
+	public int deleteBoard(int deleteNo) {
+		int executeUpdate = 0;
+		Connection connection = null;
+		PreparedStatement statement = null;
+		try {
+			connection = dataSource.getConnection();
+			String sql = "delete from board where no = ?";
+            statement = connection.prepareStatement(sql);
+
+            statement.setInt(1, deleteNo);
+
+			executeUpdate = statement.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+				statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return executeUpdate;
+
 	}
 }

@@ -18,10 +18,10 @@ public class BoardService {
 	public int insertBoard(BoardVO vo) {
 		return dao.insertBoard(vo);
 	}
-	public void updateBoard(BoardVO vo) {
-		dao.updateBoard(vo);
+	public int updateBoard(BoardVO vo) {
+		return dao.updateBoard(vo);
 	}
-	public void deleteBoard(int deleteNo) {
-		dao.deleteBoard(deleteNo);
+	public int deleteBoard(int deleteNo) {
+		return dao.deleteBoard(deleteNo);
 	}
 }

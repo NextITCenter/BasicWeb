@@ -1,17 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>회원 수정</title>
-<style>
-	label {
-		display: block;
-	}
-</style>
-</head>
-<body>
+<jsp:include page="/WEB-INF/views/common/header.jsp">
+	<jsp:param value="회원 정보 수정" name="title"/>
+</jsp:include>
 <h1>회원 정보 수정</h1>
 <form action="/member/update" method="post">
 	<label>ID: 
@@ -29,5 +20,4 @@
 	<button type="submit">저장</button>
 	<button type="button">취소</button>
 </form>
-</body>
-</html>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

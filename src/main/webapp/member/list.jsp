@@ -1,34 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>회원 목록</title>
-<style>
-	form {
-		text-align: right;
-		padding-right: 100px;
-	}
-</style>
-</head>
-<body>
-<header>
-<c:choose>
-	<c:when test="${not empty member}"><!-- member != null, member ne null -->
-		<form action="/logout" method="get">
-			<span id="loginName">${member.name }님</span>
-			<button type="submit">로그아웃</button>
-		</form>
-	</c:when>
-	<c:otherwise>
-		<form action="/login" method="get">
-			<button type="submit">로그인</button>
-		</form>
-	</c:otherwise>
-</c:choose>
-</header>
+<jsp:include page="/WEB-INF/views/common/header.jsp">
+	<jsp:param value="회원 목록" name="title"/>
+</jsp:include>
 <h1>회원 목록</h1>
 <a href="/member/add">신규 회원</a>
 <table>
@@ -47,8 +22,7 @@
 	</tr>
 	</c:forEach>
 </table>
-</body>
-</html>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
 
 

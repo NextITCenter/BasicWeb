@@ -55,7 +55,7 @@ public class MemberListServlet extends HttpServlet {
 		// list객체를 다음 서블릿(또는 JSP)에게 보내는 방법
 		req.setAttribute("members", list);//HashMap과 비슷한 형태로 객체 저장
 		// 화면으로 요청을 위임(dispatcher)
-		req.getRequestDispatcher("/member/list.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/member/list.jsp").forward(req, resp);
 		
 	}
 	

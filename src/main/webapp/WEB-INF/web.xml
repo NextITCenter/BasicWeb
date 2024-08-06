@@ -48,6 +48,15 @@
   	<servlet-name>memberList</servlet-name>
   	<url-pattern>/member/list</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>memberInsert</servlet-name>
+  	<servlet-class>chapter05.MemberInsertServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>memberInsert</servlet-name>
+  	<url-pattern>/member/insert</url-pattern>
+  </servlet-mapping>
 </web-app>
 
 

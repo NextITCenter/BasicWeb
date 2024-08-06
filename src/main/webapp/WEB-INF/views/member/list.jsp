@@ -11,6 +11,7 @@
 <!-- HTML 주석 -->
 <%-- 자바 side 주석 --%>
 <!-- EL(Expression Language) -->
+<a href="/member/insert">회원 등록</a>
 <table>
 	<tr>
 		<th>아이디</th>
@@ -21,7 +22,7 @@
 	<c:forEach items="${members}" var="m">
 	<tr>
 		<td>${m.memId}</td>
-		<td>${m.memName}</td>
+		<td><a href="/member/detail?id=${m.memId}">${m.memName}</a></td>
 		<td>${m.memHp}</td>
 		<td>${m.memMail}</td>
 	</tr>

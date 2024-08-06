@@ -26,7 +26,7 @@ public class MemberListServlet extends HttpServlet {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			connection = DriverManager.getConnection("jdbc:oracle:thin:@nextit.or.kr:1521:xe", "std225", "oracle21c");
 			statement = connection.createStatement();
-			String sql = "select mem_id, mem_name, mem_hp, mem_mail from member";
+			String sql = "select mem_id, mem_name, mem_hp, mem_mail from member where mem_del_yn != 'Y'";
 			resultSet = statement.executeQuery(sql);
 			while (resultSet.next()) {
 				String memId = resultSet.getString("mem_id");

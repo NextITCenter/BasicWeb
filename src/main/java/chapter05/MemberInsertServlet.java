@@ -30,7 +30,6 @@ public class MemberInsertServlet extends HttpServlet {
 		// 절대로 웹 개발할 때 System.out.println을 사용하면 안된다.
 //		System.out.println("memId: " + memId);
 		// 받은 데이터를 데이터베이스에 저장
-		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@nextit.or.kr:1521:xe", "std225", "oracle21c");

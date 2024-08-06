@@ -57,6 +57,33 @@
   	<servlet-name>memberInsert</servlet-name>
   	<url-pattern>/member/insert</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>memberDetail</servlet-name>
+  	<servlet-class>chapter05.MemberDetailServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>memberDetail</servlet-name>
+  	<url-pattern>/member/detail</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>memberDelete</servlet-name>
+  	<servlet-class>chapter05.MemberDeleteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>memberDelete</servlet-name>
+  	<url-pattern>/member/delete</url-pattern>
+  </servlet-mapping>
+  
+    <servlet>
+  	<servlet-name>memberUpdate</servlet-name>
+  	<servlet-class>chapter05.MemberUpdateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>memberUpdate</servlet-name>
+  	<url-pattern>/member/update</url-pattern>
+  </servlet-mapping>
 </web-app>
 
 

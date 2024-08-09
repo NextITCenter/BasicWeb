@@ -11,7 +11,7 @@
 <!-- HTML 주석 -->
 <%-- 자바 side 주석 --%>
 <!-- EL(Expression Language) -->
-<a href="/member/insert">회원 등록</a>
+<a href="${pageContext.request.contextPath }/member/insert">회원 등록</a>
 <table>
 	<tr>
 		<th>아이디</th>

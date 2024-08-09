@@ -76,7 +76,7 @@
   	<url-pattern>/member/delete</url-pattern>
   </servlet-mapping>
   
-    <servlet>
+  <servlet>
   	<servlet-name>memberUpdate</servlet-name>
   	<servlet-class>chapter05.MemberUpdateServlet</servlet-class>
   </servlet>

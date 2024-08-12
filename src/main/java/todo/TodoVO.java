@@ -8,9 +8,18 @@ public class TodoVO {
 	private String writer;
 	private boolean complete;
 	private LocalDate dueDate;
+	public TodoVO(int tNo, boolean complete) {
+		this.tNo = tNo;
+		this.complete = complete;
+	}
 	public TodoVO(String title, String writer) {
 		this.title = title;
 		this.writer = writer;
+	}
+	public TodoVO(String title, String writer, LocalDate dueDate) {
+		this.title = title;
+		this.writer = writer;
+		this.dueDate = dueDate;
 	}
 	public TodoVO(int tNo, String title, String writer, boolean complete, LocalDate dueDate) {
 		this.tNo = tNo;

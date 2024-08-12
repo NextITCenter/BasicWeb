@@ -25,7 +25,10 @@
 	<div>작성자: 
 		<input type="text" name="writer">
 	</div>
-	<div> 
+	<div>완료일자:
+		<input type="date" name="dueDate">
+	</div>
+	<div>
 		<button>등록</button>
 	</div>
 </form>

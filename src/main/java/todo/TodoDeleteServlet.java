@@ -12,8 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 public class TodoDeleteServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String tNo = req.getParameter("tNo");
-		
+		int tNo = req.getParameter("tNo") == null || req.getParameter("tNo").isEmpty() ? 0 : Integer.parseInt(req.getParameter("tNo"));
+		TodoService service = new TodoService();
+		int deleteTodo = service.deleteTodo(tNo);
+		if (deleteTodo > 0) {
+			resp.sendRedirect("/todo/list");
+		} else {
+			req.setAttribute("msg", "삭제에 실패했습니다.");
+			req.getRequestDispatcher("/WEB-INF/views/todo/view.jsp").forward(req, resp);
+		}
 	}
 }
 

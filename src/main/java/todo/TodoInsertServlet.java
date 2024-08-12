@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,8 +26,11 @@ public class TodoInsertServlet extends HttpServlet {
 		req.setCharacterEncoding("utf-8");
 		String title = req.getParameter("title");
 		String writer = req.getParameter("writer");
+		String paramDueDate = req.getParameter("dueDate");
+		LocalDate dueDate = paramDueDate == null || paramDueDate.isEmpty()
+							? LocalDate.now() : LocalDate.parse(paramDueDate);
 		TodoService service = new TodoService();
-		int insertTodo = service.insertTodo(new TodoVO(title, writer));
+		int insertTodo = service.insertTodo(new TodoVO(title, writer, dueDate));
 		if (insertTodo > 0) {
 			resp.sendRedirect("/todo/list");
 		} else {

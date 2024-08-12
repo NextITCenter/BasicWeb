@@ -29,4 +29,15 @@ public class TodoService {
 		return dao.deleteTodo(tNo);
 	}
 	
+	public TodoVO updateComplete(TodoVO todo) {
+		TodoDAO dao = new TodoDAO();
+		dao.updateComplete(todo);
+		return dao.selectComplete(todo.gettNo());
+	}
 }
+
+
+
+
+
+

@@ -10,9 +10,6 @@
 	.tr-line-through {
 		text-decoration: line-through;
 	}
-	.tr-none {
-		text-decoration: none;
-	}
 </style>
 </head>
 <body>
@@ -32,7 +29,7 @@
 		}
 	 -->
 	<c:forEach var="todo" items="${todoList}">
-	<tr>
+	<tr class="${todo.complete ? 'tr-line-through' : ''}">
 		<td>${todo.tNo}</td>
 		<td><a href="/todo/view?tNo=${todo.tNo}">${todo.title}</a></td>
 		<td>${todo.writer}</td>
@@ -43,7 +40,6 @@
 	</c:forEach>
 </table>
 <script>
-	
 	document.querySelectorAll("input[type=checkbox]").forEach(item => {
 		item.addEventListener("change", (evt) => {
 			const checkBox = evt.target;
@@ -53,11 +49,14 @@
 			.then(data => {
 				console.log(data.result);
 				if (data.result === "success") {
-					if (checkBox.checked) {
-						checkBox.parentElement.parentElement.style.textDecoration="line-through";
-					} else {
-						checkBox.parentElement.parentElement.style.textDecoration="none";
-					}
+// 					if (checkBox.checked) {
+// 						checkBox.parentElement.parentElement.style.textDecoration = "line-through";
+// 					} else {
+// 						checkBox.parentElement.parentElement.style.textDecoration = "none";
+// 					}
+//					javascript classList: 클래스 속성을 변경
+//					add("tr-line-through"), remove("tr-line-through"), toggle("tr-line-through")
+					checkBox.parentElement.parentElement.classList.toggle("tr-line-through");
 					checkBox.parentElement.parentElement.children[3].textContent = data.complete ? "완료":"미완료";
 				}
 			});

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper의 namespace는 Mapper 인터페이스와 연동할 때 사용 -->
+<mapper namespace="todo.TodoMapper">
+	<select id="selectTotoList" resultType="todo.TodoVO">
+		SELECT
+			T_NO,
+			TITLE,
+			WRITER,
+			COMPLETE,
+			DUE_DATE
+		FROM
+			TODO
+	</select>
+	<select id="selectToto" parameterType="int" resultType="todo.TodoVO">
+		SELECT
+			T_NO,
+			TITLE,
+			WRITER,
+			COMPLETE,
+			DUE_DATE
+		FROM
+			TODO
+		WHERE
+			T_NO = #{tNo}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+

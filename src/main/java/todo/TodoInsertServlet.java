@@ -29,7 +29,7 @@ public class TodoInsertServlet extends HttpServlet {
 		String paramDueDate = req.getParameter("dueDate");
 		LocalDate dueDate = paramDueDate == null || paramDueDate.isEmpty()
 							? LocalDate.now() : LocalDate.parse(paramDueDate);
-		TodoService service = new TodoService();
+		TodoService service = TodoService.getInstance();
 		int insertTodo = service.insertTodo(new TodoVO(title, writer, dueDate));
 		if (insertTodo > 0) {
 			resp.sendRedirect("/todo/list");

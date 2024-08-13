@@ -15,7 +15,7 @@ import common.MySqlSession;
 public class TodoListServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		TodoService service = new TodoService();
+		TodoService service = TodoService.getInstance();
 		List<TodoVO> todoList = service.selectTodoList();
 		
 		req.setAttribute("todoList", todoList);

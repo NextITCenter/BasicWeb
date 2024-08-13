@@ -16,7 +16,7 @@ public class TodoUpdateServlet extends HttpServlet {
 		String updateTNo = req.getParameter("tNo");
 		int tNo = updateTNo == null || updateTNo.isEmpty() ? 0 : Integer.parseInt(updateTNo);
 		
-		TodoService service = new TodoService();
+		TodoService service = TodoService.getInstance();
 		TodoVO todo = service.selectTodo(tNo);
 		
 		req.setAttribute("todo", todo);
@@ -35,7 +35,7 @@ public class TodoUpdateServlet extends HttpServlet {
 				? null : LocalDate.parse(paramDueDate);
 		TodoVO todo = new TodoVO(tNo, title, writer, false, dueDate);
 		
-		TodoService service = new TodoService();
+		TodoService service = TodoService.getInstance();
 		int updateTodo = service.updateTodo(todo);
 		
 		if (updateTodo > 0) {

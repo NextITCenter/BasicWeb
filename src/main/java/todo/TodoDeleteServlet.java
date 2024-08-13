@@ -13,7 +13,7 @@ public class TodoDeleteServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int tNo = req.getParameter("tNo") == null || req.getParameter("tNo").isEmpty() ? 0 : Integer.parseInt(req.getParameter("tNo"));
-		TodoService service = new TodoService();
+		TodoService service = TodoService.getInstance();
 		int deleteTodo = service.deleteTodo(tNo);
 		if (deleteTodo > 0) {
 			resp.sendRedirect("/todo/list");

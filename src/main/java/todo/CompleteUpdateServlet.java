@@ -22,7 +22,7 @@ public class CompleteUpdateServlet extends HttpServlet {
 
 		TodoVO todo = new TodoVO(tNo, complete);
 		
-		TodoService service = new TodoService();
+		TodoService service = TodoService.getInstance();
 		// 업데이트 후 데이터베이스에 존재하는 complete 값만 가져오기
 		TodoVO vo = service.updateComplete(todo);
 		

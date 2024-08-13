@@ -13,7 +13,7 @@ public class TodoViewServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int searchTNo = req.getParameter("tNo") != null ? Integer.parseInt(req.getParameter("tNo")) : 0;
-		TodoService service = new TodoService();
+		TodoService service = TodoService.getInstance();
 		TodoVO todo = service.selectTodo(searchTNo);
 		
 		req.setAttribute("todo", todo);

@@ -31,7 +31,9 @@ public class MySqlSession {
 		sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 	}
 	public static SqlSession getSqlSession() {
-		return sqlSessionFactory.openSession();
+		// MyBatis는 등록, 수정, 삭제시 auto commit 이 비활성화 되어 있음
+		// SqlSession 객체 생성시 옵션에 auto commit을 true로 활성화 해줘야 함
+		return sqlSessionFactory.openSession(true);
 	}
 }
 

@@ -24,6 +24,45 @@
 		WHERE
 			T_NO = #{tNo}
 	</select>
+	<insert id="insertTodo" parameterType="todo.TodoVO">
+		INSERT INTO TODO
+			(TITLE, WRITER, DUE_DATE)
+		VALUES
+			(#{title}, #{writer}, #{dueDate})
+	</insert>
+	<update id="updateTodo" parameterType="todo.TodoVO">
+		UPDATE
+			TODO
+		SET
+			TITLE = #{title},
+			WRITER = #{writer},
+			DUE_DATE = #{dueDate}
+		WHERE
+			T_NO = #{tNo}
+	</update>
+	<delete id="deleteTodo">
+		DELETE FROM
+			TODO
+		WHERE
+			T_NO = #{tNo}
+	</delete>
+	<update id="updateComplete" parameterType="todo.TodoVO">
+		UPDATE
+			TODO
+		SET
+			COMPLETE = #{complete}
+		WHERE
+			T_NO = #{tNo}
+	</update>
+	<select id="selectComplete" parameterType="int" resultType="todo.TodoVO">
+		SELECT
+			T_NO,
+			COMPLETE
+		FROM
+			TODO
+		WHERE
+			T_NO = #{tNo}
+	</select>
 </mapper>
 
 

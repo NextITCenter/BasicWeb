@@ -12,7 +12,6 @@ public class LoginServlet extends HttpServlet {
 	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		super.service(req, resp);
 	}
 	

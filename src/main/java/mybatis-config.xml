@@ -13,7 +13,11 @@
     </environment>
   </environments>
   <mappers>
-    <mapper resource="/todo-mapper.xml"/>
-    <mapper resource="/board-mapper.xml"/>
+    <mapper resource="/mappers/todo-mapper.xml"/>
+    <mapper resource="/mappers/board-mapper.xml"/>
+    <mapper resource="/mappers/login-mapper.xml"/>
   </mappers>
 </configuration>
+
+
+

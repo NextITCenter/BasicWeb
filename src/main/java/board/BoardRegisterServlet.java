@@ -16,6 +16,7 @@ public class BoardRegisterServlet extends HttpServlet {
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8");
 		// 수정, 등록시 필요
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");

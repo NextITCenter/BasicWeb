@@ -5,6 +5,7 @@ import java.time.LocalDate;
 // 우리나라 웹 개발에서는 DTO보다는 VO(Value Object)를 많이 사용
 public class MemberDTO {
 	private String memId;
+	private String memPass;
 	private String memName;
 	private LocalDate memBir;
 	private String memZip;
@@ -29,11 +30,29 @@ public class MemberDTO {
 		this.memHp = memHp;
 		this.memMail = memMail;
 	}
+	public MemberDTO(String memId, String memPass, String memName, LocalDate memBir, String memZip, String memAdd1,
+			String memAdd2, String memHp, String memMail) {
+		this.memId = memId;
+		this.memPass = memPass;
+		this.memName = memName;
+		this.memBir = memBir;
+		this.memZip = memZip;
+		this.memAdd1 = memAdd1;
+		this.memAdd2 = memAdd2;
+		this.memHp = memHp;
+		this.memMail = memMail;
+	}
 	public String getMemId() {
 		return memId;
 	}
 	public void setMemId(String memId) {
 		this.memId = memId;
+	}
+	public String getMemPass() {
+		return memPass;
+	}
+	public void setMemPass(String memPass) {
+		this.memPass = memPass;
 	}
 	public String getMemName() {
 		return memName;
@@ -79,8 +98,8 @@ public class MemberDTO {
 	}
 	@Override
 	public String toString() {
-		return "MemberDTO [memId=" + memId + ", memName=" + memName + ", memBir=" + memBir + ", memZip=" + memZip
-				+ ", memAdd1=" + memAdd1 + ", memAdd2=" + memAdd2 + ", memHp=" + memHp + ", memMail=" + memMail + "]";
+		return "MemberDTO [memId=" + memId + ", memPass=" + memPass + ", memName=" + memName + ", memBir=" + memBir
+				+ ", memZip=" + memZip + ", memAdd1=" + memAdd1 + ", memAdd2=" + memAdd2 + ", memHp=" + memHp
+				+ ", memMail=" + memMail + "]";
 	}
-	
 }

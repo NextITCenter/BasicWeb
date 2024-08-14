@@ -34,6 +34,23 @@
 		values
 			(#{title}, #{content}, #{writer})
 	</insert>
+	<update id="modifyBoard" parameterType="board.BoardDTO">
+		update
+			board
+		set
+			title = #{title},
+			content = #{content},
+			writer = #{writer},
+			modified_date = sysdate
+		where
+			id = #{id}
+	</update>
+	<delete id="removeBoard" parameterType="int">
+		delete from
+			board
+		where
+			id = #{id}
+	</delete>
 </mapper>
 
 

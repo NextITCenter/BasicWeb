@@ -23,7 +23,6 @@ public class TodoInsertServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("utf-8");
 		String title = req.getParameter("title");
 		String writer = req.getParameter("writer");
 		String paramDueDate = req.getParameter("dueDate");

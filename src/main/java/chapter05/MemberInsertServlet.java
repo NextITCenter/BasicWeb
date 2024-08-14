@@ -19,7 +19,6 @@ public class MemberInsertServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("utf-8");
 		// view 페이지에서 form 태그의 name 속성이 request의 parameter란 이름으로 사용된다.
 		String memId = req.getParameter("memId");
 		String memPass = req.getParameter("memPass");

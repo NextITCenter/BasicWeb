@@ -72,7 +72,6 @@ public class MemberUpdateServlet extends HttpServlet {
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("utf-8");
 		String memId = req.getParameter("memId");
 		String memPass = req.getParameter("memPass");
 		String memName = req.getParameter("memName");

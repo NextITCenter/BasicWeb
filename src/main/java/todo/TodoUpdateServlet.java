@@ -25,7 +25,6 @@ public class TodoUpdateServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("utf-8");
 		String paramTNo = req.getParameter("tNo");
 		int tNo = paramTNo == null || paramTNo.isEmpty() ? 0 : Integer.parseInt(paramTNo);
 		String title = req.getParameter("title");

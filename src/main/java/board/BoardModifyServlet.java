@@ -17,7 +17,7 @@ public class BoardModifyServlet extends HttpServlet {
 		BoardService service = BoardService.getInstance();
 		BoardDTO board = service.selectBoard(id);
 		req.setAttribute("board", board);
-		req.getRequestDispatcher("/WEB-INF/views/board/update.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/board/modify.jsp").forward(req, resp);
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -36,7 +36,7 @@ public class BoardModifyServlet extends HttpServlet {
 			resp.sendRedirect("/boards");
 		} else {
 			req.setAttribute("msg", "게시글 수정 실패!");
-			req.getRequestDispatcher("/WEB-INF/views/board/update.jsp").forward(req, resp);
+			req.getRequestDispatcher("/WEB-INF/views/board/modify.jsp").forward(req, resp);
 		}
 	}
 }

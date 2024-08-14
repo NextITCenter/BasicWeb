@@ -15,7 +15,7 @@
 	</div>
 	<div>
 		<label>작성자:
-			<input type="text" name="writer">
+			<input type="text" name="writer" value="${sessionScope.member.memId}">
 		</label>
 	</div>
 	<div>

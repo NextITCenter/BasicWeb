@@ -10,12 +10,17 @@
 <form action="/login" method="post">
 	<div>
 		<label>아이디:
-			<input type="text" name="userId">
+			<input type="text" name="userId" value="${cookie.rememberId.value }">
 		</label>
 	</div>
 	<div>
 		<label>패스워드:
 			<input type="password" name="userPw">
+		</label>
+	</div>
+	<div>
+		<label>
+			<input type="checkbox" name="rememberMe" value="remember-me">아이디 저장
 		</label>
 	</div>
 	<div>

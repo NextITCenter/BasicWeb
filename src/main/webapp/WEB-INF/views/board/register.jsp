@@ -7,7 +7,7 @@
 <title>게시글 등록</title>
 </head>
 <body>
-<form action="/boards/register" method="post">
+<form action="/boards/register" method="post" enctype="multipart/form-data">
 	<div>
 		<label>제목:
 			<input type="text" name="title">
@@ -21,6 +21,11 @@
 	<div>
 		<label>내용:
 			<textarea rows="4" cols="30" name="content"></textarea>
+		</label>
+	</div>
+	<div>
+		<label>첨부파일:
+			<input type="file" name="files">
 		</label>
 	</div>
 	<div>

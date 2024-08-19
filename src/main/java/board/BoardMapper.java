@@ -8,4 +8,7 @@ public interface BoardMapper {
 	int registerBoard(BoardDTO board);
 	int modifyBoard(BoardDTO board);
 	int removeBoard(int id);
+	
+	// 첨부파일 저장
+	int insertFile(List<FileDTO> file);
 }

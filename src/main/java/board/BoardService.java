@@ -24,7 +24,8 @@ public class BoardService {
 		return mapper.selectBoard(id);
 	}
 	int registerBoard(BoardDTO board) {
-		return mapper.registerBoard(board);
+		mapper.registerBoard(board);
+		return mapper.insertFile(board.getFileList());
 	}
 	int modifyBoard(BoardDTO board) {
 		return mapper.modifyBoard(board);
@@ -32,6 +33,7 @@ public class BoardService {
 	int removeBoard(int id) {
 		return mapper.removeBoard(id);
 	}
+	
 }
 
 

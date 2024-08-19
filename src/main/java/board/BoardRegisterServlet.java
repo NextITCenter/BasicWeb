@@ -4,14 +4,19 @@ import java.io.IOException;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import org.apache.ibatis.session.SqlSession;
 
 @WebServlet("/boards/register")
+// MultipartConfig 어노테이션 또는 web.xml 에 multipart-config를 추가하지 않으면
+// multipart/form-data 형식의 파일을 처리할 수 없다.
+@MultipartConfig(maxFileSize = 10485760)
 public class BoardRegisterServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -19,11 +24,29 @@ public class BoardRegisterServlet extends HttpServlet {
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("utf-8");
 		// 수정, 등록시 필요
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
 		String writer = req.getParameter("writer");
+		
+		// 첨부파일 처리
+		// 첨부파일과 파라미터를 함께 처리할 수 있다.
+		// 주로 첨부파일만 가져올 때 사용하는 경우가 많다.
+		// Part: 부분
+		Part filesPart = req.getPart("files");
+		// 실제 데이터베이스에 저장될 내용
+		long fileSize = filesPart.getSize();// 첨부파일의 용량(크기)
+		String originalName = filesPart.getSubmittedFileName();// 첨부파일 이름
+
+		String contentType = filesPart.getContentType();// 첨부파일의 컨텐츠 타입
+		
+		System.out.println("업로드된 파일 크기: " + fileSize);
+		System.out.println("업로드된 파일 이름: " + originalName);
+		System.out.println("업로드된 파일 컨텐츠 타입: " + contentType);
+		
+		// 실제 물리적인 서버 위치에 파일을 저장하기
+		filesPart.write("c:\\Users\\pc11\\upload\\" + originalName);
+//		filesPart.write("/User/pc11/upload/" + originalName);
 		
 		BoardDTO board = new BoardDTO(title, content, writer);
 

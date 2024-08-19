@@ -51,6 +51,15 @@
 		where
 			id = #{id}
 	</delete>
+	
+	<!-- 첨부파일 저장 -->
+	<insert id="insertFile" parameterType="board.FileDTO">
+		insert into
+			attached_file
+			(board_id, file_path, file_name, original_name, file_size)
+		values
+			(#{boardId}, #{filePath}, #{fileName}, #{originalName}, #{fileSize})
+	</insert>
 </mapper>
 
 

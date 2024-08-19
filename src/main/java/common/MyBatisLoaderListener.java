@@ -6,14 +6,11 @@ import java.io.InputStream;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import javax.servlet.annotation.WebListener;
 
-import org.apache.catalina.core.ApplicationContext;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-@WebListener
 public class MyBatisLoaderListener implements ServletContextListener {
     public MyBatisLoaderListener() {
     }

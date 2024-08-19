@@ -12,6 +12,11 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
+	
+	<listener>
+		<display-name>myBatisLoader</display-name>
+		<listener-class>common.MyBatisLoaderListener</listener-class>
+	</listener>
 
 	<filter>
 		<filter-name>encodingFilter</filter-name>
@@ -86,6 +91,18 @@
 		<servlet-name>memberUpdate</servlet-name>
 		<url-pattern>/member/update</url-pattern>
 	</servlet-mapping>
+	
+<!-- 	<servlet> -->
+<!-- 		<servlet-name>boardRegister</servlet-name> -->
+<!-- 		<servlet-class>board.BoardRegisterServlet</servlet-class> -->
+<!-- 		<multipart-config> -->
+<!-- 			<max-file-size>10485760</max-file-size> -->
+<!-- 		</multipart-config> -->
+<!-- 	</servlet> -->
+<!-- 	<servlet-mapping> -->
+<!-- 		<servlet-name>boardRegister</servlet-name> -->
+<!-- 		<url-pattern>/boards/register</url-pattern> -->
+<!-- 	</servlet-mapping> -->
 </web-app>
 
 

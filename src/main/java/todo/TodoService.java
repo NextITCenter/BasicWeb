@@ -8,13 +8,14 @@ import common.MySqlSession;
 
 public class TodoService {
 	private static TodoService instance = new TodoService();
-	private TodoMapper mapper;
+	private static TodoMapper mapper;
 	
 	private TodoService() {
-		SqlSession session = MySqlSession.getSqlSession();
-		mapper = session.getMapper(TodoMapper.class);
+//		SqlSession session = MySqlSession.getSqlSession();
+//		mapper = session.getMapper(TodoMapper.class);
 	}
-	public static TodoService getInstance() {
+	public static TodoService getInstance(SqlSession session) {
+		mapper = session.getMapper(TodoMapper.class);
 		return instance;
 	}
 	

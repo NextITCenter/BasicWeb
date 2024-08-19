@@ -2,6 +2,7 @@ package login;
 
 import java.io.IOException;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -10,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
+
+import board.BoardService;
 import chapter05.MemberDTO;
 
 @WebServlet("/login")
@@ -27,7 +31,11 @@ public class LoginServlet extends HttpServlet {
 		String userId = req.getParameter("userId");
 		String userPw = req.getParameter("userPw");
 		String rememberMe = req.getParameter("rememberMe");
-		LoginService service = LoginService.getInstance();
+
+		ServletContext context = req.getServletContext();
+		SqlSession sqlSession = (SqlSession) context.getAttribute("sqlSession");
+		LoginService service = LoginService.getInstance(sqlSession);
+		
 		MemberDTO member = service.findMemberById(userId, userPw);
 		// session: req에서 가져옴
 		// cookie: resp에 저장

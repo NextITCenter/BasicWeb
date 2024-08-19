@@ -8,12 +8,13 @@ import common.MySqlSession;
 
 public class BoardService {
 	private static BoardService instance = new BoardService();
-	private BoardMapper mapper;
+	private static BoardMapper mapper;
 	private BoardService() {
-		SqlSession session = MySqlSession.getSqlSession();
-		mapper = session.getMapper(BoardMapper.class);
+//		SqlSession session = MySqlSession.getSqlSession();
+//		mapper = session.getMapper(BoardMapper.class);
 	}
-	public static BoardService getInstance() {
+	public static BoardService getInstance(SqlSession session) {
+		mapper = session.getMapper(BoardMapper.class);
 		return instance;
 	}
 	List<BoardDTO> selectBoards() {

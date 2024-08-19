@@ -8,11 +8,14 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.ibatis.session.SqlSession;
 
 @WebServlet("/todo/insert")
 public class TodoInsertServlet extends HttpServlet {
@@ -28,7 +31,9 @@ public class TodoInsertServlet extends HttpServlet {
 		String paramDueDate = req.getParameter("dueDate");
 		LocalDate dueDate = paramDueDate == null || paramDueDate.isEmpty()
 							? LocalDate.now() : LocalDate.parse(paramDueDate);
-		TodoService service = TodoService.getInstance();
+		ServletContext context = req.getServletContext();
+		SqlSession sqlSession = (SqlSession) context.getAttribute("sqlSession");
+		TodoService service = TodoService.getInstance(sqlSession);
 		int insertTodo = service.insertTodo(new TodoVO(title, writer, dueDate));
 		if (insertTodo > 0) {
 			resp.sendRedirect("/todo/list");

@@ -3,11 +3,14 @@ package todo;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.ibatis.session.SqlSession;
 
 @WebServlet("/todo/complete")
 public class CompleteUpdateServlet extends HttpServlet {
@@ -22,7 +25,10 @@ public class CompleteUpdateServlet extends HttpServlet {
 
 		TodoVO todo = new TodoVO(tNo, complete);
 		
-		TodoService service = TodoService.getInstance();
+		ServletContext context = req.getServletContext();
+		SqlSession sqlSession = (SqlSession) context.getAttribute("sqlSession");
+		TodoService service = TodoService.getInstance(sqlSession);
+
 		// 업데이트 후 데이터베이스에 존재하는 complete 값만 가져오기
 		TodoVO vo = service.updateComplete(todo);
 		

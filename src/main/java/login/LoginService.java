@@ -6,13 +6,14 @@ import chapter05.MemberDTO;
 import common.MySqlSession;
 
 public class LoginService {
-	private LoginMapper mapper;
+	private static LoginMapper mapper;
 	private static LoginService instance = new LoginService();
 	private LoginService() {
-		SqlSession session = MySqlSession.getSqlSession();
-		mapper = session.getMapper(LoginMapper.class);
+//		SqlSession session = MySqlSession.getSqlSession();
+//		mapper = session.getMapper(LoginMapper.class);
 	}
-	public static LoginService getInstance() {
+	public static LoginService getInstance(SqlSession session) {
+		mapper = session.getMapper(LoginMapper.class);
 		return instance;
 	}
 	

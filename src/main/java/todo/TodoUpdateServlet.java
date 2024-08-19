@@ -3,11 +3,14 @@ package todo;
 import java.io.IOException;
 import java.time.LocalDate;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.ibatis.session.SqlSession;
 
 @WebServlet("/todo/update")
 public class TodoUpdateServlet extends HttpServlet {
@@ -16,7 +19,9 @@ public class TodoUpdateServlet extends HttpServlet {
 		String updateTNo = req.getParameter("tNo");
 		int tNo = updateTNo == null || updateTNo.isEmpty() ? 0 : Integer.parseInt(updateTNo);
 		
-		TodoService service = TodoService.getInstance();
+		ServletContext context = req.getServletContext();
+		SqlSession sqlSession = (SqlSession) context.getAttribute("sqlSession");
+		TodoService service = TodoService.getInstance(sqlSession);
 		TodoVO todo = service.selectTodo(tNo);
 		
 		req.setAttribute("todo", todo);
@@ -34,7 +39,9 @@ public class TodoUpdateServlet extends HttpServlet {
 				? null : LocalDate.parse(paramDueDate);
 		TodoVO todo = new TodoVO(tNo, title, writer, false, dueDate);
 		
-		TodoService service = TodoService.getInstance();
+		ServletContext context = req.getServletContext();
+		SqlSession sqlSession = (SqlSession) context.getAttribute("sqlSession");
+		TodoService service = TodoService.getInstance(sqlSession);
 		int updateTodo = service.updateTodo(todo);
 		
 		if (updateTodo > 0) {

@@ -25,7 +25,14 @@ public class BoardService {
 	}
 	int registerBoard(BoardDTO board) {
 		mapper.registerBoard(board);
-		return mapper.insertFile(board.getFileList());
+		// 게시글을 등록한 뒤에 방금 등록된 게시글 번호를 가져와서
+		// 첨부파일 내용을 등록할 때 함께 넣어줘야 한다.
+		int boardId = board.getId();
+		List<FileDTO> fileList = board.getFileList();
+		for (FileDTO file : fileList) {
+			file.setBoardId(boardId);
+		}
+		return mapper.insertFile(fileList);
 	}
 	int modifyBoard(BoardDTO board) {
 		return mapper.modifyBoard(board);

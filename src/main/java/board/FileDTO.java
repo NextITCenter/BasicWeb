@@ -13,8 +13,7 @@ public class FileDTO {
 	private LocalDateTime registerDate;
 	public FileDTO() {
 	}
-	public FileDTO(int boardId, String filePath, String fileName, String originalName, long fileSize) {
-		this.boardId = boardId;
+	public FileDTO(String filePath, String fileName, String originalName, long fileSize) {
 		this.filePath = filePath;
 		this.fileName = fileName;
 		this.originalName = originalName;

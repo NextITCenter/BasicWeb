@@ -1,6 +1,11 @@
 package board;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -18,6 +23,7 @@ import org.apache.ibatis.session.SqlSession;
 // multipart/form-data 형식의 파일을 처리할 수 없다.
 @MultipartConfig(maxFileSize = 10485760)
 public class BoardRegisterServlet extends HttpServlet {
+	private static final String FILE_PATH = "c:\\Users\\pc11\\upload\\";
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.getRequestDispatcher("/WEB-INF/views/board/register.jsp").forward(req, resp);
@@ -45,16 +51,25 @@ public class BoardRegisterServlet extends HttpServlet {
 		System.out.println("업로드된 파일 컨텐츠 타입: " + contentType);
 		
 		// 실제 물리적인 서버 위치에 파일을 저장하기
-		filesPart.write("c:\\Users\\pc11\\upload\\" + originalName);
+		String fileName = UUID.randomUUID().toString();
+		filesPart.write(FILE_PATH + fileName);
+		// 리눅스, 맥에서는 다음과 같이 작성
 //		filesPart.write("/User/pc11/upload/" + originalName);
 		
 		BoardDTO board = new BoardDTO(title, content, writer);
+		// 파일 정보 넣어주기
+		List<FileDTO> fileList = new ArrayList<FileDTO>();
+		
+		fileList.add(new FileDTO(FILE_PATH, fileName, originalName, fileSize));
+		
+		board.setFileList(fileList);
 
 		ServletContext context = req.getServletContext();
 		SqlSession session = (SqlSession) context.getAttribute("sqlSession");
 		BoardService service = BoardService.getInstance(session);
 		
 		int modifyBoard = service.registerBoard(board);
+		
 		if (modifyBoard > 0) {
 			resp.sendRedirect("/boards");
 		} else {

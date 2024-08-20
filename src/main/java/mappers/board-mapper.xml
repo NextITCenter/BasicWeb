@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board.BoardMapper">
-	<select id="selectBoards" resultType="board.BoardDTO">
+	<resultMap type="board" id="boardMap">
+		<result column="id" property="id"/>
+		<result column="title" property="title"/>
+		<result column="content" property="content"/>
+		<result column="writer" property="writer"/>
+		<result column="hits" property="hits"/>
+		<result column="register_date" property="registerDate"/>
+		<result column="modified_date" property="modifiedDate"/>
+		<collection column="id" property="fileList" select="selectFiles"
+						javaType="list" ofType="file" />
+	</resultMap>
+	<select id="selectBoards" resultType="board">
 		SELECT
 			ID,
 			TITLE,
@@ -12,8 +23,10 @@
 			MODIFIED_DATE
 		FROM
 			BOARD
+		ORDER BY
+			ID
 	</select>
-	<select id="selectBoard" parameterType="int" resultType="board.BoardDTO">
+	<select id="selectBoard" parameterType="int" resultMap="boardMap">
 		SELECT
 			ID,
 			TITLE,
@@ -27,7 +40,7 @@
 		WHERE
 			ID = #{id}
 	</select>
-	<insert id="registerBoard" parameterType="board.BoardDTO"
+	<insert id="registerBoard" parameterType="board"
 			useGeneratedKeys="true" keyColumn="id" keyProperty="id">
 		INSERT INTO
 			BOARD
@@ -35,7 +48,7 @@
 		VALUES
 			(#{title}, #{content}, #{writer})
 	</insert>
-	<update id="modifyBoard" parameterType="board.BoardDTO">
+	<update id="modifyBoard" parameterType="board">
 		UPDATE
 			BOARD
 		SET
@@ -65,14 +78,22 @@
 			DUAL
 		</foreach>
 	</insert>
+	
+	<select id="selectFiles" parameterType="int" resultType="file">
+		SELECT
+			ID,
+			BOARD_ID,
+			FILE_PATH,
+			FILE_NAME,
+			ORIGINAL_NAME,
+			FILE_SIZE,
+			REGISTER_DATE
+		FROM
+			ATTACHED_FILE
+		WHERE
+			BOARD_ID = #{boardId}
+	</select>
 </mapper>
-
-
-
-
-
-
-
 
 
 

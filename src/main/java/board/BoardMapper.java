@@ -2,6 +2,8 @@ package board;
 
 import java.util.List;
 
+import file.FileDTO;
+
 public interface BoardMapper {
 	List<BoardDTO> selectBoards();
 	BoardDTO selectBoard(int id);

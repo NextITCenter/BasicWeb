@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import common.MySqlSession;
+import file.FileDTO;
 
 public class BoardService {
 	private static BoardService instance = new BoardService();

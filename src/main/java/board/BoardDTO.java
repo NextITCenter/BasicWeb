@@ -3,6 +3,8 @@ package board;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import file.FileDTO;
+
 public class BoardDTO {
 	private int id;
 	private String title;

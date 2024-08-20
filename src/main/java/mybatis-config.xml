@@ -1,22 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-  <environments default="development">
-    <environment id="development">
-      <transactionManager type="JDBC"/>
-      <dataSource type="POOLED">
-        <property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
-        <property name="url" value="jdbc:oracle:thin:@nextit.or.kr:1521:xe"/>
-        <property name="username" value="std225"/>
-        <property name="password" value="oracle21c"/>
-      </dataSource>
-    </environment>
-  </environments>
-  <mappers>
-    <mapper resource="/mappers/todo-mapper.xml"/>
-    <mapper resource="/mappers/board-mapper.xml"/>
-    <mapper resource="/mappers/login-mapper.xml"/>
-  </mappers>
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+	</settings>
+	<typeAliases>
+		<typeAlias type="board.BoardDTO" alias="board"/>
+		<typeAlias type="file.FileDTO" alias="file"/>
+	</typeAliases>
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="oracle.jdbc.driver.OracleDriver" />
+				<property name="url" value="jdbc:oracle:thin:@nextit.or.kr:1521:xe" />
+				<property name="username" value="std225" />
+				<property name="password" value="oracle21c" />
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="/mappers/todo-mapper.xml" />
+		<mapper resource="/mappers/board-mapper.xml" />
+		<mapper resource="/mappers/login-mapper.xml" />
+		<mapper resource="/mappers/file-mapper.xml" />
+	</mappers>
 </configuration>
 
 

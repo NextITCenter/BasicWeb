@@ -18,6 +18,8 @@ import javax.servlet.http.Part;
 
 import org.apache.ibatis.session.SqlSession;
 
+import file.FileDTO;
+
 @WebServlet("/boards/register")
 // MultipartConfig 어노테이션 또는 web.xml 에 multipart-config를 추가하지 않으면
 // multipart/form-data 형식의 파일을 처리할 수 없다.

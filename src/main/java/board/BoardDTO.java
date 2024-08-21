@@ -3,6 +3,7 @@ package board;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import comment.CommentDTO;
 import file.FileDTO;
 
 public class BoardDTO {
@@ -15,6 +16,7 @@ public class BoardDTO {
 	private LocalDateTime modifiedDate;
 	
 	private List<FileDTO> fileList;
+	private List<CommentDTO> commentList;
 	
 	public BoardDTO(String title, String content, String writer) {
 		this.title = title;
@@ -85,10 +87,16 @@ public class BoardDTO {
 	public void setFileList(List<FileDTO> fileList) {
 		this.fileList = fileList;
 	}
+	public List<CommentDTO> getCommentList() {
+		return commentList;
+	}
+	public void setCommentList(List<CommentDTO> commentList) {
+		this.commentList = commentList;
+	}
 	@Override
 	public String toString() {
 		return "BoardDTO [id=" + id + ", title=" + title + ", content=" + content + ", writer=" + writer + ", hits="
 				+ hits + ", registerDate=" + registerDate + ", modifiedDate=" + modifiedDate + ", fileList=" + fileList
-				+ "]";
+				+ ", commentList=" + commentList + "]";
 	}
 }

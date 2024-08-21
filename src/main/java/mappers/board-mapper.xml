@@ -11,6 +11,8 @@
 		<result column="modified_date" property="modifiedDate"/>
 		<collection column="id" property="fileList" select="selectFiles"
 						javaType="list" ofType="file" />
+		<collection column="id" property="commentList" select="comment.CommentMapper.selectComments"
+						javaType="list" ofType="comment" />
 	</resultMap>
 	<select id="selectBoards" resultType="board">
 		SELECT

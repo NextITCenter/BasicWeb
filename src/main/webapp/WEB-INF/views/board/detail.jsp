@@ -127,7 +127,7 @@
 										<label for="content">댓글</label>
 									</div>
 									<span>
-										<button style="height: 80px" type="button" id="registerBtn" class="btn btn-info">등록</button>
+										<button style="height: 80px" type="button" id="updateBtn" class="btn btn-warning">수정</button>
 									</span>
 									<span>
 										<button style="height: 80px" type="button" id="cancelBtn" class="btn btn-secondary">취소</button>

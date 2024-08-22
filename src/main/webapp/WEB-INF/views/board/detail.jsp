@@ -59,7 +59,7 @@
 			<input type="hidden" name="writer" id="writer" value="miso">
 		</form>
 	</div>
-	<div id="commentList" class="list-group">
+	<div id="commentList" class="list-group mb-3">
 		<c:forEach items="${board.commentList}" var="comment">
 		<div class="list-group-item list-group-item-action">
 		    <div class="d-flex w-100 justify-content-between">
@@ -109,7 +109,6 @@
 			document.querySelector("#content").value = "";
 		})
 	})
-	
 </script>
 </body>
 </html>

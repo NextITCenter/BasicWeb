@@ -16,6 +16,8 @@ import org.apache.ibatis.session.SqlSession;
 public class CommentRegisterServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// request의 getParameter() 메소드는 요청 헤더(Request Header)에
+		// Content-Type이 application/x-www-form-urlencoded로 되어 있어야 처리 가능
 		String paramBoardId = req.getParameter("boardId");
 		int boardId = paramBoardId == null || paramBoardId.isEmpty() ? 0 : Integer.parseInt(paramBoardId);
 		String content = req.getParameter("content");
@@ -27,7 +29,7 @@ public class CommentRegisterServlet extends HttpServlet {
 		CommentService service = CommentService.getInstance(session);
 		
 		CommentDTO comment = new CommentDTO(boardId, content, writer);
-		int registerComment = service.registerComment(comment);
+		CommentDTO newComment = service.registerComment(comment);
 		// 응답을 json 형식으로 해준다.
 		resp.setContentType("application/json");
 		PrintWriter out = resp.getWriter();
@@ -41,9 +43,9 @@ public class CommentRegisterServlet extends HttpServlet {
 				"modifiedDate":"%s"
 			}
 			""".formatted(
-					comment.getId(), comment.getBoardId(),
-					comment.getContent(), comment.getWriter(),
-					comment.getRegisterDate(), comment.getModifiedDate()
+					newComment.getId(), newComment.getBoardId(),
+					newComment.getContent(), newComment.getWriter(),
+					newComment.getRegisterDate(), newComment.getModifiedDate()
 				);
 		out.println(json);
 	}

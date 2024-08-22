@@ -27,7 +27,8 @@
 		WHERE
 			ID = #{id}
 	</select>
-	<insert id="registerComment" parameterType="comment">
+	<insert id="registerComment" parameterType="comment" useGeneratedKeys="true"
+				keyColumn="id" keyProperty="id">
 		INSERT INTO
 			COMMENTS
 			(BOARD_ID, CONTENT, WRITER)

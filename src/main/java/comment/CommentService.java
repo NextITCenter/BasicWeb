@@ -22,8 +22,9 @@ public class CommentService {
 		return mapper.selectComment(id);
 	}
 	// 댓글 등록하기
-	public int registerComment(CommentDTO comment) {
-		return mapper.registerComment(comment);
+	public CommentDTO registerComment(CommentDTO comment) {
+		mapper.registerComment(comment);
+		return mapper.selectComment(comment.getId());
 	}
 	// 댓글 수정하기
 	public int modifyComment(CommentDTO comment) {

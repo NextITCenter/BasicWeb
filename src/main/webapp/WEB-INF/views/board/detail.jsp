@@ -49,13 +49,13 @@
 		<form action="/comment/new" method="post">
 			<textarea rows="4" cols="30" name="content" id="content"></textarea>
 			<input type="hidden" name="boardId" id="boardId" value="${board.id}">
-			<input type="hidden" name="writer" id="writer" value="${sessionScope.member.memId}">
+			<input type="hidden" name="writer" id="writer" value="miso">
 			<button type="button" id="registerBtn">등록</button>
 		</form>
 	</div>
-	<div>
+	<div id="commentList">
 		<c:forEach items="${board.commentList}" var="comment">
-			<div>${comment.content}</div>
+		<div>${comment.content}</div>
 		</c:forEach>
 	</div>
 </div>
@@ -67,15 +67,25 @@
 	// 아래 코드보다 좀더 간편하게 폼 데이터를 전송하는 방식
 	/*
 		FormData 객체가 존재 => 보통 첨부파일이 존재할 때 간단하게 데이터 전송할 수 있음
+		multipart/form-data로 전송됨
 	*/
 	registerBtn.addEventListener("click", (e) => {
+		// fectch보다 사용하기 편한 axios 라이브러리 사용
 		fetch("/comment/new", {
 			method: "POST",
+			headers: {
+				"Content-Type": "application/x-www-form-urlencoded"
+			},
+			// "Content-Type": "application/json"
+			// "Content-Type": "multipart/form-data" => 첨부파일 처리하는 설정 필요
+			// Content-Type을 생략하면 기본적으로 text/plain;charset=UTF-8로 전송한다.
 			body: `boardId=\${document.querySelector("#boardId").value}&content=\${document.querySelector("#content").value}&writer=\${document.querySelector("#writer").value}`
 		})
 		.then(response => response.json())
 		.then(data => {
-			console.log(data);
+			const commentList = document.querySelector("#commentList")
+			commentList.innerHTML += `<div>\${data.content}</div>`;
+			document.querySelector("#content").value = "";
 		})
 	})
 	

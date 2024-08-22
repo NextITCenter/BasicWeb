@@ -5,30 +5,29 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- 데스크탑 화면과 모바일 화면을 비슷한 비율로 처리하기 위한 코드 -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 <!-- 이곳에 스타일시트 -->
+<link rel="stylesheet" href="/css/bootstrap.min.css">
 </head>
 <body>
-<div>
-	<div>
-		<label>게시글 아이디:
-			<input type="text" name="id" value="${board.id}">
-		</label>
+<div class="container">
+	<div class="form-floating mb-3">
+		<input type="text" name="id" id="boardId" value="${board.id}" class="form-control">
+		<label for="boardId">게시글 아이디:</label>
 	</div>
-	<div>
-		<label>제목:
-			<input type="text" name="title" value="${board.title}">
-		</label>
+	<div class="form-floating mb-3">
+		<input type="text" name="title" id="boardTitle" value="${board.title}" class="form-control">
+		<label for="boardTitle">제목:</label>
 	</div>
-	<div>
-		<label>작성자:
-			<input type="text" name="writer" value="${board.writer}">
-		</label>
+	<div class="form-floating mb-3">
+		<input type="text" name="writer" id="boardWriter" value="${board.writer}" class="form-control">
+		<label for="boardWriter">작성자:</label>
 	</div>
-	<div>
-		<label>내용:
-			<textarea rows="4" cols="30" name="content">${board.content}</textarea>
-		</label>
+	<div class="form-floating mb-3">
+		<textarea style="height: 100px" name="content" id="boardContent" class="form-control">${board.content}</textarea>
+		<label for="boardContent">내용:</label>
 	</div>
 	<div>
 		첨부파일:
@@ -39,23 +38,37 @@
 		</div>
 	</div>
 	<div>
-		<a href="/boards/modify?id=${board.id}">수정</a>
-		<a href="/boards/remove?id=${board.id}">삭제</a>
+		<a href="/boards/modify?id=${board.id}" class="btn btn-primary">수정</a>
+		<a href="/boards/remove?id=${board.id}" class="btn btn-success">삭제</a>
 	</div>
 	<div>
 		<h4>Comments</h4>
 	</div>
 	<div>
 		<form action="/comment/new" method="post">
-			<textarea rows="4" cols="30" name="content" id="content"></textarea>
+			<div class="input-group">
+				<div class="form-floating">
+					<textarea style="height: 80px" name="content" id="content" class="form-control"></textarea>
+					<label for="content">댓글</label>
+				</div>
+				<span>
+					<button style="height: 80px" type="button" id="registerBtn" class="btn btn-info">등록</button>
+				</span>
+			</div>
 			<input type="hidden" name="boardId" id="boardId" value="${board.id}">
 			<input type="hidden" name="writer" id="writer" value="miso">
-			<button type="button" id="registerBtn">등록</button>
 		</form>
 	</div>
-	<div id="commentList">
+	<div id="commentList" class="list-group">
 		<c:forEach items="${board.commentList}" var="comment">
-		<div>${comment.content}</div>
+		<div class="list-group-item list-group-item-action">
+		    <div class="d-flex w-100 justify-content-between">
+		      <h5 class="mb-1">${comment.content }</h5>
+		      <small>${comment.registerDate }</small>
+		    </div>
+		    <p class="mb-1">${comment.writer }</p>
+		    <small></small>
+		</div>
 		</c:forEach>
 	</div>
 </div>
@@ -84,7 +97,15 @@
 		.then(response => response.json())
 		.then(data => {
 			const commentList = document.querySelector("#commentList")
-			commentList.innerHTML += `<div>\${data.content}</div>`;
+			commentList.innerHTML += `<div class="list-group-item list-group-item-action">
+		    <div class="d-flex w-100 justify-content-between">
+		      <h5 class="mb-1">\${data.content }</h5>
+		      <small>\${data.registerDate }</small>
+		    </div>
+		    <p class="mb-1">\${data.writer }</p>
+		    <small></small>
+			</div>`
+			
 			document.querySelector("#content").value = "";
 		})
 	})

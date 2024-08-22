@@ -13,6 +13,8 @@
 			COMMENTS
 		WHERE
 			BOARD_ID = #{boardId}
+		ORDER BY
+			REGISTER_DATE
 	</select>
 	<select id="selectComment" parameterType="int" resultType="comment">
 		SELECT

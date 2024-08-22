@@ -31,7 +31,7 @@ public class CommentRegisterServlet extends HttpServlet {
 		CommentDTO comment = new CommentDTO(boardId, content, writer);
 		CommentDTO newComment = service.registerComment(comment);
 		// 응답을 json 형식으로 해준다.
-		resp.setContentType("application/json");
+		resp.setContentType("application/json;charset=utf-8");
 		PrintWriter out = resp.getWriter();
 		String json = """
 			{

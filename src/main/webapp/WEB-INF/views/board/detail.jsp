@@ -68,6 +68,10 @@
 		    </div>
 		    <p class="mb-1">${comment.writer }</p>
 		    <small></small>
+		    <div class="d-flex justify-content-end">
+		    	<a href="" class="btn btn-outline-warning btn-sm">수정</a>
+		    	<a href="" class="btn btn-outline-danger btn-sm">삭제</a>
+		    </div>
 		</div>
 		</c:forEach>
 	</div>

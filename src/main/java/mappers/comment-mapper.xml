@@ -46,7 +46,7 @@
 		WHERE
 			ID = #{id}
 	</update>
-	<delete id="removecomment" parameterType="int">
+	<delete id="removeComment" parameterType="int">
 		DELETE FROM
 			COMMENTS
 		WHERE

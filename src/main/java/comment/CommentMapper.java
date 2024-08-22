@@ -12,6 +12,6 @@ public interface CommentMapper {
 	// 댓글 수정하기
 	int modifyComment(CommentDTO comment);
 	// 댓글 삭제
-	int removecomment(int id);
+	int removeComment(int id);
 	
 }

@@ -70,7 +70,7 @@
 		    <small></small>
 		    <div class="d-flex justify-content-end ${comment.writer eq sessionScope.member.memId ?'':'d-none'}">
 		    	<button name="commentUpdateBtn" class="btn btn-outline-warning btn-sm">수정</button>
-		    	<button name="commentDeleteBtn" class="btn btn-outline-danger btn-sm">삭제</button>
+		    	<button name="commentDeleteBtn" data-id="${comment.id}" class="btn btn-outline-danger btn-sm">삭제</button>
 		    </div>
 		</div>
 		</c:forEach>
@@ -81,6 +81,7 @@
 	// fetch() 함수를 이용해서 서버로 댓글 전송(post 방식으로 전송)
 	// 결과를 방금 등록한 댓글만 응답받게 한다.
 	const registerBtn = document.querySelector("#registerBtn");
+	const commentList = document.querySelector("#commentList")
 	// 아래 코드보다 좀더 간편하게 폼 데이터를 전송하는 방식
 	/*
 		FormData 객체가 존재 => 보통 첨부파일이 존재할 때 간단하게 데이터 전송할 수 있음
@@ -100,7 +101,6 @@
 		})
 		.then(response => response.json())
 		.then(data => {
-			const commentList = document.querySelector("#commentList")
 			commentList.innerHTML += `<div class="list-group-item list-group-item-action">
 		    <div class="d-flex w-100 justify-content-between">
 		      <h5 class="mb-1">\${data.content }</h5>
@@ -121,6 +121,9 @@
 			console.log(ev.target.parentElement.parentElement);
 			const parent = ev.target.parentElement.parentElement
 			let content = parent.children[0].children[0].textContent
+			let registerDate = parent.children[0].children[1].textContent
+			let writer = parent.children[1].textContent
+			
 			parent.innerHTML = `<div class="input-group">
 									<div class="form-floating">
 										<textarea style="height: 80px" name="content" id="content" class="form-control">\${content}</textarea>
@@ -134,6 +137,16 @@
 									</span>
 								</div>`;
 		})
+	});
+	commentDeleteBtns.forEach(item => {
+		item.addEventListener("click", (ev) => {
+			console.log(ev.target.dataset.id);
+			fetch("/comment/rem?id=" + ev.target.dataset.id)
+			.then(response => response.json())
+			.then(data => {
+				commentList.removeChild(ev.target.parentElement.parentElement);
+			});
+		});
 	});
 </script>
 </body>

@@ -31,7 +31,7 @@ public class CommentService {
 		return mapper.modifyComment(comment);
 	}
 	// 댓글 삭제
-	public int removecomment(int id) {
-		return mapper.removecomment(id);
+	public int removeComment(int id) {
+		return mapper.removeComment(id);
 	}
 }

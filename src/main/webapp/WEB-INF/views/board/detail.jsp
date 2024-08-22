@@ -56,21 +56,21 @@
 				</span>
 			</div>
 			<input type="hidden" name="boardId" id="boardId" value="${board.id}">
-			<input type="hidden" name="writer" id="writer" value="miso">
+			<input type="hidden" name="writer" id="writer" value="${sessionScope.member.memId }">
 		</form>
 	</div>
 	<div id="commentList" class="list-group mb-3">
 		<c:forEach items="${board.commentList}" var="comment">
 		<div class="list-group-item list-group-item-action">
 		    <div class="d-flex w-100 justify-content-between">
-		      <h5 class="mb-1">${comment.content }</h5>
-		      <small>${comment.registerDate }</small>
+		      <h5 class="mb-1">${comment.content}</h5>
+		      <small>${comment.registerDate}</small>
 		    </div>
-		    <p class="mb-1">${comment.writer }</p>
+		    <p class="mb-1">${comment.writer}</p>
 		    <small></small>
-		    <div class="d-flex justify-content-end">
-		    	<a href="" class="btn btn-outline-warning btn-sm">수정</a>
-		    	<a href="" class="btn btn-outline-danger btn-sm">삭제</a>
+		    <div class="d-flex justify-content-end ${comment.writer eq sessionScope.member.memId ?'':'d-none'}">
+		    	<button name="commentUpdateBtn" class="btn btn-outline-warning btn-sm">수정</button>
+		    	<button name="commentDeleteBtn" class="btn btn-outline-danger btn-sm">삭제</button>
 		    </div>
 		</div>
 		</c:forEach>
@@ -113,6 +113,28 @@
 			document.querySelector("#content").value = "";
 		})
 	})
+	// 댓글 수정 및 삭제
+	const commentUpdateBtns = document.querySelectorAll("[name=commentUpdateBtn]");
+	const commentDeleteBtns = document.querySelectorAll("[name=commentDeleteBtn]");
+	commentUpdateBtns.forEach(item => {
+		item.addEventListener("click", (ev) => {
+			console.log(ev.target.parentElement.parentElement);
+			const parent = ev.target.parentElement.parentElement
+			let content = parent.children[0].children[0].textContent
+			parent.innerHTML = `<div class="input-group">
+									<div class="form-floating">
+										<textarea style="height: 80px" name="content" id="content" class="form-control">\${content}</textarea>
+										<label for="content">댓글</label>
+									</div>
+									<span>
+										<button style="height: 80px" type="button" id="registerBtn" class="btn btn-info">등록</button>
+									</span>
+									<span>
+										<button style="height: 80px" type="button" id="cancelBtn" class="btn btn-secondary">취소</button>
+									</span>
+								</div>`;
+		})
+	});
 </script>
 </body>
 </html>
